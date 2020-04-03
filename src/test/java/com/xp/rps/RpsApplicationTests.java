@@ -7,7 +7,9 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.HashMap;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class RpsApplicationTests {
@@ -96,6 +98,21 @@ class RpsApplicationTests {
 
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals("Game Drawn",response.getBody());
+
+	}
+
+	@Test
+	void testRound() {
+
+		HashMap<String,String> map = new HashMap<>();
+		map.put("value","1");
+		restTemplate.put("/admin/reset/{value}",null, map);
+		
+		ResponseEntity<Integer> response = restTemplate.getForEntity("/admin/round",Integer.class);
+
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+		assertNotNull(response.getBody());
+		assertTrue(response.getBody() == 1);
 
 	}
 

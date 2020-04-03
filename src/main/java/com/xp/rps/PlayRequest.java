@@ -12,7 +12,6 @@ public class PlayRequest implements Serializable {
 
     private RPS getRPSFromString(String rps){
         RPS rp = null;
-        System.out.println("Value of RPS ==============="+rps);
         if(rps != null) {
             if (rps.equalsIgnoreCase("rock")) {
                 rp = RPS.ROCK;
